@@ -18,19 +18,19 @@ Parameters:
     Type: String
   Usernames:
     AllowedPattern: ^([a-z_]([a-z0-9_-]{0,31}|[a-z0-9_-]{0,30}\$))+(,([a-z_]([a-z0-9_-]{0,31}|[a-z0-9_-]{0,30}\$)))*$
-    Default: ec2-user,ubuntu
+    Default: ec2-user,ubuntu  # FIXME: Usernames for the Linux User that is used to log into the Workers
     Description: Usernames for the Linux user that is used to log into the Workers
     MaxLength: 64
     MinLength: 1
     Type: String
   S3Bucket:
-    Default: 'deploy' # Add the bucket name here. This S3 bucket will hold the public key
+    Default: 'deploy' # FIXME: Add the bucket name here. This S3 bucket will hold the public key
     Description: Bucket to keep the public key
     MaxLength: 255
     MinLength: 1
     Type: String
   S3File:
-    Default: 'ssh/dev/public_key' # S3 key of SSH public key
+    Default: 'ssh/dev/public_key' # FIXME: S3 key of SSH public key
     Description: s3 path of the public key
     MaxLength: 255
     MinLength: 1
@@ -45,7 +45,7 @@ Resources:
     Type: AWS::Lambda::Permission
   RotateSSH:
     Properties:
-      CodeUri: s3://lambda-codes/rotate_ssh.zip # S3 URI of the lambda code
+      CodeUri: s3://lambda-codes/rotate_ssh.zip # FIXME: S3 URI of the lambda code
       Description: Rotates SSH Keys
       Environment:
         Variables:
@@ -83,7 +83,7 @@ Resources:
             - s3:PutObject
           Effect: Allow
           Resource:
-            Fn::Sub: arn:aws:s3:::deploy/*  # Add the bucket ARN here. This S3 bucket will hold the public key
+            Fn::Sub: arn:aws:s3:::deploy/*  # FIXME: Add the bucket ARN here. This S3 bucket will hold the public key
           Sid: S3Actions
         - Action:
             - "kms:Describe*"
@@ -127,9 +127,9 @@ Resources:
       Timeout: 300
       VpcConfig:
         SecurityGroupIds:
-          - 'sg-XXXXXXXXX' # Security Group IDs of the Lambda function
+          - 'sg-XXXXXXXXX' # FIXME: Security Group IDs of the Lambda function
         SubnetIds:
-          - 'subnet-XXXXXXXXXX' # Security Group Ids of the Lambda function
+          - 'subnet-XXXXXXXXXX' # FIXME: Security Group Ids of the Lambda function
     Type: AWS::Serverless::Function
 Transform: AWS::Serverless-2016-10-31
 
