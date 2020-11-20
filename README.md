@@ -18,3 +18,6 @@ Following parameters need to be changed:
 - Security Group IDs
 - Subset IDs
 
+# blog
+Please go though the following blog for detailed step by step procedure to setup
+https://medium.com/@singhamrit/ec2-mfa-ssh-key-rotation-fddc807f9318
